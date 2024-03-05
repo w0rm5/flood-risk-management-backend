@@ -1,3 +1,6 @@
 flask
 flask_cors
 python-dotenv
+pyjwt
+bcrypt
+pymongo
