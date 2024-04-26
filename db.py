@@ -3,8 +3,9 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 
 MONGO_URI = os.environ.get("MONGO_URI")
-cluster = MongoClient(MONGO_URI)
-db = cluster["Cluster0"]
+DB_NAME = os.environ.get("DB_NAME")
+clusters = MongoClient(MONGO_URI)
+db = clusters[DB_NAME]
 
 
 def find_one(col_name: str, query: dict = None, projection: dict = None):
