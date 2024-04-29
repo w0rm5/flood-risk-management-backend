@@ -1,0 +1,143 @@
+station_id,station_name,latitude,longitude,elevation,Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec
+1005,"Hon Wah College",22.264817,114.249942,"",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+1006,"Ho Koon Education Center",22.3838416910934,114.10797894000999,"","","","","","","","","","","","",""
+1009,"Baptist Wing Lung Secondary School",22.3987910140138,113.971028029919,"","","","","","","","","","","","",""
+1010,"San Wui Commercial Society Secondary School",22.4082,113.96319,"",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+1011,"Pui Ching Middle School (Hong Kong)",22.31746,114.17755,"","","","","","","","","","","","",""
+1012,"Ho Dao College (Sponsored by Sik Sik Yuen)",22.433918569311704,113.99966865777999,"",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+1013,"Tak Sun Secondary School",22.4101953637434,114.221919178963,"",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+1016,"T.W.G.Hs Chen Zao Men COLLEGE",22.364339189364,114.128921627998,"","","","","","","","","","","","",""
+1017,"Queen's College Old Boy's Association Secondary School",22.361345240288802,114.099492430687,"",Y,Y,Y,Y,Y,Y,Y,Y,Y,"","",""
+3000,"Personal Weather Station at Sha Pa Village (Courtesy of Mr. Daniel Van Hoy)",22.449627,114.135849,"",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+3001,"Personal Weather Station at Lei Cheng Uk (Courtesy of Oscar)",22.337324,114.164241,"",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+3002,"Personal Weather Station at Tai O (Courtesy of Mr. Jacek Piwowarczyk)",22.24686241,113.87287903,"","","","","","","","","","","","",Y
+3003,"Personal Weather Station at Mui Wo (Courtesy of Mr. Jacek Piwowarczyk)",22.264019,114.001671,"","","","","","","","","","","","",Y
+6002,"Hong Kong Sea School",22.218357184425397,114.21423196792601,"",Y,Y,"","",Y,Y,Y,Y,Y,Y,"",Y
+6003,"Po Leung Kuk Wu Chung College",22.4163397851743,114.227195084095,"",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+6004,"Ho Dao College (Sponsored by Sik Sik Yuen)",22.433918569311704,113.99966865777999,"","",Y,Y,Y,"","","","","",Y,Y,Y
+6005,"Pui Ying Secondary School",22.253204993215803,114.13532406091699,"","","","",Y,"","","","",Y,Y,Y,""
+6006,"Fanling Public School",22.496759993879003,114.137585163116,"","",Y,Y,Y,"","","","","","","",""
+6007,"Elegantia College",22.492928804340597,114.12427872419401,"",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+6008,"Sha Tau Kok Central Primary School",22.54661,114.22338,"",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+6009,"Sing Yin Secondary School",22.3088824051382,114.238052666187,"","",Y,Y,Y,Y,Y,"","","","","",""
+6010,"Kowloon Bay St. John The Baptist Catholic Primary School",22.3280502751685,114.211812615395,"","",Y,"","","","","","","","","",""
+6011,"FDBWA Szeto Ho Secondary School",22.306413,114.235116,"","","","","",Y,"","","","","","",""
+6012,"Tak Oi Secondary School",22.3472948964471,114.204618930817,"","","","",Y,Y,Y,Y,"","","","",""
+6013,"Hong Kong Institute of Vocational Education (Chai Wan)",22.2721099512072,114.239889979362,"",Y,Y,Y,Y,"","","","","","","",""
+6014,"Cheung Chau Sacred Heart School",22.2098177032018,114.030122458935,"","","","","","","","","","","","",""
+6015,"T.W.G.Hs Chen Zao Men COLLEGE",22.364339189364,114.128921627998,"","","",Y,Y,Y,Y,Y,Y,Y,Y,"",""
+6016,"German Swiss International School",22.265435422464,114.160442948341,"",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+6017,"Hong Kong Taoist Association Tang Hin Memorial Secondary School",22.499337189765598,114.12918180227301,"",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+6018,"China Holiness Church Living Spirit College",22.456849460761198,114.173853993416,"",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+6019,"SKH Kei Fook Primary School",22.3361930315711,114.154609143734,"",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+6020,"KCBC Hay Nien (Yan Ping) Primary School",22.368868438191903,114.182107150555,"",Y,Y,Y,Y,Y,Y,Y,Y,Y,"",Y,Y
+6021,"Hong Kong Taoist Association Ching Chung Secondary School",22.314120643678102,114.232690930367,"",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+6022,"Lok Sin Tong Ku Chiu Man Secondary School",22.3606928633919,114.12382274866098,"","",Y,Y,"","","","","",Y,Y,Y,Y
+6023,"St Paul's College",22.2844578585178,114.13869827985799,"","","","","","","","","","","","",""
+6024,"Caritas Wu Cheng-Chung Secondary School",22.2675974188496,114.129329323769,"","","","","","","","","","","","",""
+6025,"HKSKH Lady MacLehose Centre",22.365254476607305,114.136523008347,"",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,""
+6026,"Shak Chung Shan Memorial Catholic Primary School",22.3636347365486,114.11345332860898,"",Y,Y,Y,Y,Y,Y,Y,Y,Y,"",Y,Y
+6027,"Baptist Wing Lung Secondary School",22.3987910140138,113.971028029919,"","",Y,Y,Y,Y,Y,"","","",Y,"",""
+6028,"Ho Koon Education Center",22.3838416910934,114.10797894000999,"",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+6029,"Lingnan Hang Yee Memorial Secondary School",22.2634372215913,114.25119549036,"",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+6030,"MKMCF Ma Chan Duen Hey Memorial College",22.3199641122471,114.25729215145101,"","",Y,Y,Y,Y,"","","","","","",""
+6031,"CUHK FAA Thomas Cheung School",22.3609880457124,114.17256385088001,"",Y,Y,Y,Y,Y,Y,"",Y,Y,Y,Y,Y
+6032,"Ju Ching Chu Secondary School (Tuen Mun)",22.3889580718935,113.965950608253,"","","","","","","","","","","","",""
+6033,"S.T.F.A. Ho Yat Tung Primary School (A.M.)",22.38958,113.97395,"",Y,Y,Y,Y,Y,Y,Y,Y,Y,"","",""
+6034,"Fung Kai Liu Man Shek Tong Secondary School",22.5082108017396,114.12706285715099,"","",Y,Y,"","",Y,Y,Y,"","",Y,Y
+6035,"T.W.G.Hs Sun Hoi Directors' College",22.3751858244951,113.96544367074999,"","","","","","","","","","","","",""
+6036,"Tung Wah Group of Hospitals Mrs Wu York Yu Memorial College",22.371011470624204,114.140506088734,"","",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+6037,"HKBU Affiliated School Wong Kam Fai Secondary and Primary School",22.38349,114.21061,"","","","","","","","","","","","",Y
+6038,"Shatin Pui Ying College",22.389409,114.194479,"","","","","","","","","","","","",""
+6039,"United Christian College (Kowloon East)",22.32961,114.17059,"","","","","","","","","","","","",""
+6040,"South Island School",22.25387,114.18316,"","","","","","","","","","","","",""
+6041,"POH Chan Kai Memorial College",22.36595,114.17822,"","",Y,"","","","",Y,Y,Y,"","",Y
+6042,"HKFYG Lee Shau Kee College",22.46292,114.00462,"",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+6043,"CUHKFAA Chan Chun Ha Secondary School",22.4232,114.22769,"",Y,Y,Y,Y,"","","","","","","",""
+6044,"Queen's College",22.28036,114.19191,"","","","","","","","","","","","",""
+6045,"Jockey Club HSBC WWF Hong Kong Hoi Ha Marine Life Centre",22.46327,114.33345,"",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+6046,"Sai Kung Sung Tsun Catholic School (Secondary Section)",22.38317,114.26966,"","","","","","","","","","","","",""
+6048,"Maryknoll Secondary School",22.3252,114.21672,"","","","","","","","","","","","",""
+6049,"Lee Kau Yan Memorial School",22.33193,114.19466,"","","","","","","","","","","","",""
+6050,"Hon Wah College",22.264817,114.249942,"","",Y,"","","","","",Y,"",Y,Y,""
+6051,"The Chinese Foundation Secondary School",22.26431,114.24947,"",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+6053,"Po Leung Kuk Lee Shing Pik College",22.37663,114.11018,"",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+6054,"PLK Ngan Po Ling College",22.31271,114.18988,"","","","","","","","","","","","",""
+6055,"Ma On Shan Ling Liang Primary School",22.42473,114.2408,"","",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+6056,"Henrietta Secondary School",22.29171,114.19449,"","","","","","","","","","","","",""
+6057,"Fukien Secondary School",22.264812,114.250714,"","","","","","","","","","","","",""
+6058,"Creative Secondary School",22.30758,114.26768,"",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+6059,"CUHK FAA Thomas Cheung Secondary School",22.45755,113.99789,"","",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,""
+6060,"Queen Elizabeth School Old Students' Association Tong Kwok Wah Secondary School",22.46263,114.00654,"","","","","","","","","","",Y,Y,Y
+6061,"Scout Association of Hong Kong (Pak Sha Wan T.W.C. Sea Activity Centre)",22.366224,114.260306,"","",Y,Y,"",Y,Y,Y,"","","",Y,Y
+6062,"Scout Association of Hong Kong (Tung Tsz Scout Centre)",22.47311,114.19801,"",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+6063,"Pui Ching Middle School (Hong Kong)",22.31746,114.17755,"",Y,Y,Y,Y,"","","","","","","",""
+6064,"Cheung Chuk Shan College",22.28657,114.19596,"","",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+6065,"Sung Lan Middle School",22.38009,114.17524,"",Y,Y,Y,Y,Y,Y,Y,"","","","",""
+6066,"Ning Po No. 2 College",22.324614,114.228276,"",Y,Y,Y,Y,Y,Y,Y,Y,Y,"",Y,Y
+6067,"Discovery College",22.305614,114.017487,"",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+6068,"Ling Liang Church M H Lau Secondary School",22.44039,114.17738,"",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+6069,"Fukien Secondary School (Siu Sai Wan)",22.264812,114.250714,"","",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+6070,"Fung Kai Liu Yun Sum Memorial School",22.483886,114.139892,"",Y,Y,Y,Y,Y,Y,Y,"",Y,Y,Y,Y
+6071,"St Stephen's Girls' College",22.2835370773228,114.14446234703101,"","",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+6072,"S.K.H. Chi Fu Chi Nam Primary School",22.25722,114.13868,"","","",Y,Y,Y,Y,Y,"","","","",""
+6073,"Tsung Tsin Christian Academy",22.332413,114.150391,"","","","",Y,Y,"","","","","","",""
+6074,"Stewards Pooi Kei College",22.3829091651572,114.213451445103,"","","","","","","","",Y,Y,Y,Y,Y
+6075,"Hong Kong Aviation Club Ltd",22.324383150421298,114.19033885002099,"","","","","","","","",Y,Y,Y,Y,Y
+6076,"Sha Tin College",22.392569,114.188575,"","","","","","","","","","",Y,Y,Y
+6077,"Salesian English School",22.275982,114.229333,"","","","","","","",Y,"","",Y,"",""
+6078,"Lai Chack Middle School",22.301512,114.168259,"","","","","","","","","","","","",""
+6079,"Bishop Hall Jubilee School",22.329804,114.181048,"","","","","","","","","",Y,Y,Y,Y
+6080,"Ho Lap College",22.336723956521,114.19561743736301,"","","","","","","","","","",Y,Y,Y
+6081,"Christian Alliance S W Chan Memorial College",22.481432,114.137628,"","","","","","","","","","","",Y,Y
+6082,"Buddhist Fat Ho Memorial College",22.251976,113.866414,"","","","","","","","","",Y,"","",""
+6083,"Chiu Chow Association Secondary School",22.416712,114.230062,"","","","","","","","","","","","",""
+6084,"Sham Tseng Catholic Primary School",22.367465,114.060407,"","","","","","","","","","","","",""
+6085,"Chiu Yang Primary School of Hong Kong",22.451624,114.004655,"","","","","","","","","","","","",""
+6086,"C.C.C. Kei Wai Primary School",22.379157,114.104691,"","","","","","","","","","","","",""
+6087,"Po Leung Kuk Camões Tan Siu Lin Primary School",22.315355,114.16532,"","","","","","","","","","","","",""
+6088,"Pui Tak Canossian College",22.250365,114.155846,"","","","","","","","","","","","",""
+6089,"Hong Kong Sea Cadet Corps (Jubilee Centre)",22.210846,114.213314,"","","","","","","","","","","","",""
+6090,"HK & Kowloon Kaifong Women's Association Sun Fong Chung College",22.431046,114.194711,"","","","","","","","","","","","",""
+6091,"Hong Kong Sea Cadet Corps (Tang Shiu Kin Nautical Centre)",22.386136,114.308856,"","","","","","","","","","","","",""
+6092,"San Wui Commercial Society Secondary School",22.407895,113.962891,"","","","","","","","","","","","",""
+6093,"Maryknoll Fathers' School",22.334138,114.172878,"","","","","","","","","","","","",""
+6094,"Queen's College Old Boy's Association Secondary School",22.358218,114.098107,"","","","","","","","","","","","",""
+6095,"Kellett School",22.324829,114.206732,"","","","","","","","","","","","",""
+6096,"Ho Ngai College (Sponsored by Sik Sik Yuen)",22.3899,113.974636,"","","","","","","","","","","","",""
+6097,"Caritas Yuen Long Chan Chun Ha Secondary School",22.441067,114.026414,"","","","","","","","","","","","",""
+6098,"Caritas Chan Chun Ha Field Studies Centre St. Francis Campus",22.207352,114.0377,"","","","","","","","","","","","",""
+6099,"Tong Sheung Tsuen",22.45385,114.13914,"","","","","","","","","","","","",""
+6100,"Lung Fu Shan Environmental Education Centre",22.281085,114.138384,"","","","","","","","","","","","",""
+6101,"Tung Chung Catholic School",22.283135009238503,113.935716748238,"","","","","",Y,Y,Y,"",Y,Y,Y,Y
+6106,"Scout Association of Hong Kong (Tai Tam Scout Centre)",22.239314,114.223732,"","","","","","","","","","","","",""
+6107,"Catholic Mission School",22.284093,114.147257,"","","","","","","","","","","","",""
+6108,"Wofoo Foundation Dr Joseph Lee Whole Person Development Education Centre",22.359177,114.018905,"","","","","","","","","","","","",""
+6109,"Lok Sin Tong Wong Chung Ming Secondary School",22.333902,114.194529,"","","","","","","","","","","","",""
+6111,"Ho Koon Nature Education cum Astronomical Centre (Co-WIN 2.0)",22.383608,114.108085,"","","","","","","","","","","","",""
+6112,"Our Lady of the Rosary College",22.333035,114.172627,"","","","","","","","","","","","",""
+6113,"Buddhist Chan Wing Kan Memorial School",22.437834,114.019878,"","","","","","","","","","","","",""
+6115,"ECF Saint Too Canaan College",22.330661,114.223308,"","","","","","","","","","","","",""
+6116,"La Salle College",22.328999,114.182742,"","","","","","","","","","","","",""
+6117,"N.T. Heung Yee Kuk Yuen Long District Secondary School",22.442741,114.022711,"","","","","","","","","","","","",""
+6118,"Pui Kiu Middle School",22.287978,114.204698,"","","","","","","","","","","","",""
+6121,"Tai Po Old Market Public School (Plover Cove)",22.4489223,114.1703806,"","","","","","","","","","","","",""
+6123,"The Chinese Foundation Secondary School(Co-WIN 2.0)",22.2645818,114.24938,"","","","","","","","","","","","",""
+6124,"St. Joseph's College",22.276676,114.158718,"","","","","","","","","","","","",""
+6125,"Aldrich Bay Government Primary School",22.282551,114.228577,"","","","","","","","","","","","",""
+6126,"Mu Kuang English School",22.318777,114.218986,"","","","","","","","","","","","",""
+6127,"Caritas Chan Chun Ha Field Studies Centre St. Paul Campus",22.20544,114.03214,"","","","","","","","","","","","",""
+6129,"NLSI Lui Kwok Pat Fong College",22.319126,114.227919,"","","","","","","","","","","","",""
+6130,"Tun Yu School",22.498288,114.077242,"","","","","","","","","","","","",""
+6131,"North Point Government Primary School",22.288867,114.209524,"","","","","","","","","","","","",""
+6132,"St. Paul's Secondary School",22.272368,114.184825,"","","","","","","","","","","","",""
+6133,"CNEC Christian College",22.363851,114.139638,"","","","","","","","","","","","",""
+6134,"Canossa Primary School",22.340417,114.197584,"","","","","","","","","","","","",""
+6135,"HKRSS Tai Po Secondary School",22.460731,114.171271,"","","","","","","","","","","","",""
+6136,"Tseung Kwan O Government Secondary School",22.325744,114.259715,"","","","","","","","","","","","",""
+6137,"Canadian International School of Hong Kong",22.242655,114.167574,"","","","","","","","","","","","",""
+6138,"Munsang College (Hong Kong Island)",22.28323,114.224214,"","","","","","","","","","","","",""
+6139,"C.C.C. Mong Man Wai College",22.316069,114.230672,"","","","","","","","","","","","",""
+6995,"Penny's Bay",22.312917,114.049642,"","","","","","","","","","","","",""
+9905,"ZCB",22.321036,114.208282,"","","","","","","","","","","","",""
+9913,"The Hong Kong Observatory",22.302061,114.174412,"","","","","","","","","","","","",""
