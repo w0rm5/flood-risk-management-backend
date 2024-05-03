@@ -13,7 +13,8 @@ def obj_id_to_str(obj_id):
     if isinstance(obj_id, ObjectId):
         return obj_id.__str__()
     if isinstance(obj_id, dict) and "_id" in obj_id:
-        return obj_id_to_str(obj_id["_id"])
+        obj_id["_id"] = obj_id_to_str(obj_id["_id"])
+        return obj_id
     return obj_id
 
 
@@ -50,7 +51,6 @@ class BaseClass:
 class User(BaseClass):
     def __init__(self, user):
         super().__init__(user)
-        print(user)
         if "email" not in user:
             raise BadRequest("Email is required")
         if "districts" in user:
@@ -86,6 +86,8 @@ class User(BaseClass):
         if found is not None:
             raise Conflict("Email is already in use")
         self.password = hashPassword(self.password)
+        data = self.__dict__
+        del data["confirm_password"]
         db.insert_one("users", self.__dict__)
 
     @classmethod
@@ -101,3 +103,12 @@ class User(BaseClass):
         if not check_password(password, found_user["password"]):
             raise Unauthorized("Incorrect password")
         return jwt_encode({"email": email, "is_admin": found_user["is_admin"]})
+    
+    @classmethod
+    def get_info(cls, token_data):
+        found = db.find_one("users", {"email": token_data["email"]})
+        if found == None:
+            raise Unauthorized("User not exist")
+        del found["_id"]
+        del found["password"]
+        return obj_id_to_str(found)
