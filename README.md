@@ -12,5 +12,5 @@ pip install -r requirements.txt
 - If pip is not installed, follow the [tutorial](https://pip.pypa.io/en/stable/installation/) to install
 - Run the following command to run the project
 ```
-flask --app index run
+flask --app index --debug run
 ```

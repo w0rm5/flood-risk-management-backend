@@ -5,6 +5,7 @@ from werkzeug.exceptions import HTTPException, Forbidden, BadRequest
 
 from models import Response, User
 import auth
+import flood_prediction.seasonal_trend as st
 
 load_dotenv()
 
@@ -69,4 +70,5 @@ def get_user_info():
 
 @app.get("/data/flood-info")
 def get_flood_info():
-    return get_ok_response()
+    res = st.getData(6092)
+    return jsonify(tuple(res.items()))
