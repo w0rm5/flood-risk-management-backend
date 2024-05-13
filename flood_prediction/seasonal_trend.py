@@ -4,22 +4,25 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 import csv
-import json
-
-FLOOD_DATA_DIR = os.path.abspath(os.environ.get("FLOOD_DATA_DIR"))
-weatherStations = map(int, os.environ.get("WEATHER_STATIONS").split(", "))
-# weather_stations = [6092, 6098, 6121, 6124, 6127, 6129, 6131, 6132, 6133, 6136, 6143, 6003, 6029, 6026, 6062, 6029, 6062, 6087]
+from flood_prediction.constants import FLOOD_DATA_DIR, WEATHER_STATIONS
 
 
-data_years = []
-for year in range(2011, 2024):
-    data = pd.read_csv(f"{FLOOD_DATA_DIR}/60rf_{year}.csv", parse_dates=["obstime"])
-    data_years.append(data)
+def get_all_stations_data():
+    forecasted_values = {}
 
-merged_data = pd.concat(data_years)
+    for station_id in WEATHER_STATIONS:
+    # Store the forecasted values in the dictionary
+        forecasted_values[station_id] = get_station_predicted_data(station_id)
+    
+    return forecasted_values
 
+def get_station_predicted_data(station_id):
+    data_years = []
+    for year in range(2011, 2024):
+        data = pd.read_csv(f"{FLOOD_DATA_DIR}/60rf_{year}.csv", parse_dates=["obstime"])
+        data_years.append(data)
 
-def getData(station_id):
+    merged_data = pd.concat(data_years)
     # Filter data for the current station
     station_data = merged_data[merged_data["station_id"] == station_id].copy()
 
@@ -44,8 +47,8 @@ def getData(station_id):
     result = stl.fit()
 
     # Extract trend and seasonal components
-    trend = result.trend
-    seasonal = result.seasonal
+    # trend = result.trend
+    # seasonal = result.seasonal
 
     # Extract the dates for which we have historical data available
     historical_dates = daily_data.index
@@ -74,7 +77,7 @@ def getData(station_id):
     # Combine historical and future forecasts
     combined_forecast = pd.concat([forecast, future_forecast])
 
-    return combined_forecast
+    return dict((x.strftime("%Y-%m-%d"), y) for x, y in combined_forecast.items())
 
 
 def saveData(future_forecast, station_id):
@@ -98,8 +101,8 @@ def saveData(future_forecast, station_id):
             csvwriter.writerow([time.strftime("%Y-%m-%d"), rainfall])
 
 
-forecasted_values = {}
+# forecasted_values = {}
 
-for station_id in weatherStations:
-    # Store the forecasted values in the dictionary
-    forecasted_values[station_id] = getData(station_id)
+# for station_id in weatherStations:
+#     # Store the forecasted values in the dictionary
+#     forecasted_values[station_id] = getData(station_id)

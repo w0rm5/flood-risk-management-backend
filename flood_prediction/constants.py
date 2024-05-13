@@ -1,0 +1,4 @@
+import os
+
+FLOOD_DATA_DIR = os.path.abspath("data/collatedRF")
+WEATHER_STATIONS = [6092, 6098, 6121, 6124, 6127, 6129, 6131, 6132, 6133, 6136, 6143, 6003, 6029, 6026, 6062, 6029, 6062, 6087]

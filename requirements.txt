@@ -8,3 +8,4 @@ pandas
 statsmodels
 numpy
 matplotlib
+Flask-Caching

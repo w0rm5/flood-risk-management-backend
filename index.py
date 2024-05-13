@@ -1,33 +1,43 @@
 from flask import Flask, request, g, jsonify
 from flask_cors import CORS
+from flask_caching import Cache
 from dotenv import load_dotenv
 from werkzeug.exceptions import HTTPException, Forbidden, BadRequest
 
 from models import Response, User
 import auth
 import flood_prediction.seasonal_trend as st
+import datetime
+import math
 
 load_dotenv()
 
-
-def get_ok_response(data=None):
-    return jsonify(Response(data=data).__dict__)
-
+config = {
+    "DEBUG": True, 
+    "CACHE_TYPE": "SimpleCache",  
+    "CACHE_DEFAULT_TIMEOUT": 300
+}
 
 app = Flask(__name__)
+app.config.from_mapping(config)
+cache = Cache(app)
 
 CORS(app)
 
 ACCESS_TOKEN_HEADER = "token"
-PUBLIC_ROUTES = ["/", "/user/login", "/user/register"]
+PUBLIC_ROUTES = ["/", "/user/login", "/user/register", "/data/flood-info"]
 
+def get_ok_response(data=None):
+    return jsonify(Response(data=data).__dict__)
 
 @app.errorhandler(Exception)
 def handle_error(e):
     code = 500
+    message = e.__str__()
     if isinstance(e, HTTPException):
         code = e.code
-    return jsonify(Response(message=e.description, code=code).__dict__), code
+        message = e.description
+    return jsonify(Response(message=message, code=code).__dict__), code
 
 
 @app.before_request
@@ -68,7 +78,17 @@ def get_user_info():
     return get_ok_response(res)
 
 
+def time_until_end_of_day():
+    dt = datetime.datetime.now()
+    tomorrow = dt + datetime.timedelta(days=1)
+    time_until_end_of_day = datetime.datetime.combine(tomorrow, datetime.time.min) - dt
+    return math.ceil(time_until_end_of_day.total_seconds())
+
 @app.get("/data/flood-info")
+@cache.cached(timeout=time_until_end_of_day(), query_string=True) # cache for the whole day
 def get_flood_info():
-    res = st.getData(6092)
-    return jsonify(tuple(res.items()))
+    station_id = request.args.get("station_id")
+    if station_id is None or station_id == "":
+        return BadRequest("Please specified a station")
+    res = st.get_station_predicted_data(int(station_id))
+    return get_ok_response(res)
