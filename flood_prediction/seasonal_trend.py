@@ -11,10 +11,11 @@ def get_all_stations_data():
     forecasted_values = {}
 
     for station_id in WEATHER_STATIONS:
-    # Store the forecasted values in the dictionary
+        # Store the forecasted values in the dictionary
         forecasted_values[station_id] = get_station_predicted_data(station_id)
-    
+
     return forecasted_values
+
 
 def get_station_predicted_data(station_id):
     data_years = []
@@ -78,6 +79,7 @@ def get_station_predicted_data(station_id):
     combined_forecast = pd.concat([forecast, future_forecast])
 
     return dict((x.strftime("%Y-%m-%d"), y) for x, y in combined_forecast.items())
+    # return dict((x.strftime("%Y-%m-%d"), round(y, 2)) for x, y in combined_forecast.items())
 
 
 def saveData(future_forecast, station_id):

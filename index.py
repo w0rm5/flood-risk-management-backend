@@ -12,11 +12,7 @@ import math
 
 load_dotenv()
 
-config = {
-    "DEBUG": True, 
-    "CACHE_TYPE": "SimpleCache",  
-    "CACHE_DEFAULT_TIMEOUT": 300
-}
+config = {"DEBUG": True, "CACHE_TYPE": "SimpleCache", "CACHE_DEFAULT_TIMEOUT": 300}
 
 app = Flask(__name__)
 app.config.from_mapping(config)
@@ -27,8 +23,25 @@ CORS(app)
 ACCESS_TOKEN_HEADER = "token"
 PUBLIC_ROUTES = ["/", "/user/login", "/user/register", "/data/flood-info"]
 
+
+@cache.cached(timeout=0, key_prefix="all_stations_data")
+def get_all_stations_data():
+    return st.get_all_stations_data()
+
+
+all_stations_data = st.get_all_stations_data()
+
+
 def get_ok_response(data=None):
     return jsonify(Response(data=data).__dict__)
+
+
+def time_until_end_of_day():
+    dt = datetime.datetime.now()
+    tomorrow = dt + datetime.timedelta(days=1)
+    time_until_end_of_day = datetime.datetime.combine(tomorrow, datetime.time.min) - dt
+    return math.ceil(time_until_end_of_day.total_seconds())
+
 
 @app.errorhandler(Exception)
 def handle_error(e):
@@ -78,17 +91,16 @@ def get_user_info():
     return get_ok_response(res)
 
 
-def time_until_end_of_day():
-    dt = datetime.datetime.now()
-    tomorrow = dt + datetime.timedelta(days=1)
-    time_until_end_of_day = datetime.datetime.combine(tomorrow, datetime.time.min) - dt
-    return math.ceil(time_until_end_of_day.total_seconds())
-
 @app.get("/data/flood-info")
-@cache.cached(timeout=time_until_end_of_day(), query_string=True) # cache for the whole day
+# @cache.cached(timeout=time_until_end_of_day(), query_string=True) # cache for the whole day
 def get_flood_info():
     station_id = request.args.get("station_id")
     if station_id is None or station_id == "":
         return BadRequest("Please specified a station")
-    res = st.get_station_predicted_data(int(station_id))
+    station_id = int(station_id)
+    station_data = all_stations_data[station_id]
+    date = request.args.get("date")
+    if date is None or date == "" or date not in station_data:
+        return get_ok_response(station_data)
+    res = station_data[date]
     return get_ok_response(res)
