@@ -3,7 +3,7 @@ from flask_cors import CORS
 
 # from flask_caching import Cache
 from dotenv import load_dotenv
-from werkzeug.exceptions import HTTPException, Forbidden, BadRequest
+from werkzeug.exceptions import HTTPException
 
 from models import Response, User
 import auth
@@ -11,7 +11,7 @@ import flood_prediction.seasonal_trend as st
 import datetime
 import math
 from datetime import datetime
-from flood_prediction.constants import WEATHER_STATIONS
+# from flood_prediction.constants import WEATHER_STATIONS
 
 load_dotenv()
 
@@ -35,8 +35,8 @@ PUBLIC_ROUTES = ["/", "/user/login", "/user/register", "/data/flood-info"]
 # all_stations_data = get_all_stations_data()
 
 
-def get_ok_response(data=None):
-    return jsonify(Response(data=data).__dict__)
+def get_response(data=None, code=200, message="Success"):
+    return jsonify(Response(message, code, data).__dict__), code
 
 
 # def time_until_end_of_day():
@@ -70,13 +70,13 @@ def check_token():
     if request.method == "OPTIONS" or request.path in PUBLIC_ROUTES:
         pass
     elif not ACCESS_TOKEN_HEADER in request.headers:
-        raise Forbidden("Missing token")
+        raise get_response(None, 403, "Missing token")
     else:
         try:
             user_data = auth.jwt_decode(request.headers[ACCESS_TOKEN_HEADER])
             g.user_data = user_data
         except:
-            raise Forbidden("Invalid token")
+            raise get_response(None, 403, "Invalid token")
 
 
 @app.get("/")
@@ -88,19 +88,19 @@ def hello_world():
 def user_register():
     user = User(request.get_json())
     user.register()
-    return get_ok_response("user registered")
+    return get_response("user registered")
 
 
 @app.post("/user/login")
 def user_login():
     token = User.login(request.get_json())
-    return get_ok_response(token)
+    return get_response(token)
 
 
 @app.get("/user/info")
 def get_user_info():
     res = User.get_info(g.user_data)
-    return get_ok_response(res)
+    return get_response(res)
 
 
 # @app.get("/data/flood-info")
@@ -108,38 +108,38 @@ def get_user_info():
 # def get_flood_info():
 #     station_id = request.args.get("station_id")
 #     if station_id is None or station_id == "":
-#         return BadRequest("Please specified a station")
+#         return get_response(None, 400, "Please specified a station")
 #     station_id = int(station_id)
 #     station_data = all_stations_data[station_id]
 #     date = request.args.get("date")
 #     if date is None or date == "" or date not in station_data:
-#         return get_ok_response(station_data)
+#         return get_response(station_data)
 #     res = station_data[date]
-#     return get_ok_response(res)
+#     return get_response(res)
 
 
 @app.post("/data/flood-info")
 def get_data():
     query = request.get_json()
     if "station_ids" not in query:
-        return BadRequest("Please specified station ids")
+        return get_response(None, 400, "Please specified station ids")
     station_ids = query["station_ids"]
     if not isinstance(station_ids, list):
-        return BadRequest("station_ids must be an array")
+        return get_response(None, 400, "station_ids must be an array")
     if len(station_ids) == 0:
-        return BadRequest("Please specified station ids")
+        return get_response(None, 400, "Please specified station ids")
     if "date" not in query:
-        return BadRequest("Please specified date")
+        return get_response(None, 400, "Please specified date")
     date = query["date"]
     if not validate_date(date):
-        return BadRequest("Date must be in YYYY-MM-DD format")
+        return get_response(None, 400, "Date must be in YYYY-MM-DD format")
     # res = {}
     # for id in station_ids:
     #     if not isinstance(id, int):
-    #         return BadRequest("All station ids must be integers")
+    #         return get_response(None, 400, "All station ids must be integers")
     #     if id not in WEATHER_STATIONS:
-    #         return BadRequest(f"{id} is not a station id")
+    #         return get_response(None, 400, f"{id} is not a station id")
     #     station_data = all_stations_data[id]
     #     res[id] = station_data[date]
-    # return get_ok_response(res)
-    return get_ok_response(st.get_forecasted_data(station_ids, date))
+    # return get_response(res)
+    return get_response(st.get_forecasted_data(station_ids, date))
