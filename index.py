@@ -9,6 +9,8 @@ import auth
 import flood_prediction.seasonal_trend as st
 import datetime
 import math
+from datetime import datetime
+from flood_prediction.constants import WEATHER_STATIONS
 
 load_dotenv()
 
@@ -41,6 +43,15 @@ def time_until_end_of_day():
     tomorrow = dt + datetime.timedelta(days=1)
     time_until_end_of_day = datetime.datetime.combine(tomorrow, datetime.time.min) - dt
     return math.ceil(time_until_end_of_day.total_seconds())
+
+
+def validate_date(date_text):
+    try:
+        if date_text != datetime.strptime(date_text, "%Y-%m-%d").strftime("%Y-%m-%d"):
+            raise ValueError
+        return True
+    except ValueError:
+        return False
 
 
 @app.errorhandler(Exception)
@@ -91,16 +102,42 @@ def get_user_info():
     return get_ok_response(res)
 
 
-@app.get("/data/flood-info")
-# @cache.cached(timeout=time_until_end_of_day(), query_string=True) # cache for the whole day
-def get_flood_info():
-    station_id = request.args.get("station_id")
-    if station_id is None or station_id == "":
-        return BadRequest("Please specified a station")
-    station_id = int(station_id)
-    station_data = all_stations_data[station_id]
-    date = request.args.get("date")
-    if date is None or date == "" or date not in station_data:
-        return get_ok_response(station_data)
-    res = station_data[date]
+# @app.get("/data/flood-info")
+# # @cache.cached(timeout=time_until_end_of_day(), query_string=True) # cache for the whole day
+# def get_flood_info():
+#     station_id = request.args.get("station_id")
+#     if station_id is None or station_id == "":
+#         return BadRequest("Please specified a station")
+#     station_id = int(station_id)
+#     station_data = all_stations_data[station_id]
+#     date = request.args.get("date")
+#     if date is None or date == "" or date not in station_data:
+#         return get_ok_response(station_data)
+#     res = station_data[date]
+#     return get_ok_response(res)
+
+
+@app.post("/data/flood-info")
+def get_data():
+    query = request.get_json()
+    if "station_ids" not in query:
+        return BadRequest("Please specified station ids")
+    station_ids = query["station_ids"]
+    if not isinstance(station_ids, list):
+        return BadRequest("station_ids must be an array")
+    if len(station_ids) == 0:
+        return BadRequest("Please specified station ids")
+    if "date" not in query:
+        return BadRequest("Please specified date")
+    date = query["date"]
+    if not validate_date(date):
+        return BadRequest("Date must be in YYYY-MM-DD format")
+    res = {}
+    for id in station_ids:
+        if not isinstance(id, int):
+            return BadRequest("All station ids must be integers")
+        if id not in WEATHER_STATIONS:
+            return BadRequest(f"{id} is not a station id")
+        station_data = all_stations_data[id]
+        res[id] = station_data[date]
     return get_ok_response(res)
