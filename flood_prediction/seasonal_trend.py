@@ -5,15 +5,26 @@ import numpy as np
 import os
 import csv
 from flood_prediction.constants import FLOOD_DATA_DIR, WEATHER_STATIONS
+import db
 
 
 def get_all_stations_data():
-    forecasted_values = {}
-
+    forecasted_values = []
     for station_id in WEATHER_STATIONS:
         # Store the forecasted values in the dictionary
-        forecasted_values[station_id] = get_station_predicted_data(station_id)
-
+        # try:
+        #     forecasted_values[station_id] = get_station_predicted_data(station_id)
+        # except:
+        #     forecasted_values[station_id] = None
+        try:
+            forecasted_values.append(
+                {
+                    "station_id": station_id,
+                    "data": get_station_predicted_data(station_id),
+                }
+            )
+        except:
+            pass
     return forecasted_values
 
 
@@ -79,28 +90,35 @@ def get_station_predicted_data(station_id):
     combined_forecast = pd.concat([forecast, future_forecast])
 
     return dict((x.strftime("%Y-%m-%d"), y) for x, y in combined_forecast.items())
-    # return dict((x.strftime("%Y-%m-%d"), round(y, 2)) for x, y in combined_forecast.items())
+    # _res = []
+    # for x, y in combined_forecast.items():
+    #     _dict_data = {}
+    #     _dict_data["date"] = x.strftime("%Y-%m-%d")
+    #     _dict_data["flood"] = y
+    #     _res.append(_dict_data)
+
+    # return _res
 
 
-def saveData(future_forecast, station_id):
-    # Create the directory if it doesn't exist
-    output_directory = f"{FLOOD_DATA_DIR}/predicted_data"
-    if not os.path.exists(output_directory):
-        os.makedirs(output_directory)
+# def saveData(future_forecast, station_id):
+#     # Create the directory if it doesn't exist
+#     output_directory = f"{FLOOD_DATA_DIR}/predicted_data"
+#     if not os.path.exists(output_directory):
+#         os.makedirs(output_directory)
 
-    # Define the filename
-    filename = f"{output_directory}/forecasted_{station_id}.csv"
+#     # Define the filename
+#     filename = f"{output_directory}/forecasted_{station_id}.csv"
 
-    # Open the CSV file in write mode
-    with open(filename, "w", newline="") as csvfile:
-        # Create a CSV writer object
-        csvwriter = csv.writer(csvfile)
+#     # Open the CSV file in write mode
+#     with open(filename, "w", newline="") as csvfile:
+#         # Create a CSV writer object
+#         csvwriter = csv.writer(csvfile)
 
-        # Write the header row
-        csvwriter.writerow(["timestamp", "predicted_rainfall"])
-        # Iterate over forecasted values for each station
-        for time, rainfall in future_forecast.items():
-            csvwriter.writerow([time.strftime("%Y-%m-%d"), rainfall])
+#         # Write the header row
+#         csvwriter.writerow(["timestamp", "predicted_rainfall"])
+#         # Iterate over forecasted values for each station
+#         for time, rainfall in future_forecast.items():
+#             csvwriter.writerow([time.strftime("%Y-%m-%d"), rainfall])
 
 
 # forecasted_values = {}
@@ -108,3 +126,7 @@ def saveData(future_forecast, station_id):
 # for station_id in weatherStations:
 #     # Store the forecasted values in the dictionary
 #     forecasted_values[station_id] = getData(station_id)
+
+
+def save_to_db(forecasted_values):
+    db.insert_many("forecasted_values", forecasted_values)

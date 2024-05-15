@@ -28,10 +28,10 @@ PUBLIC_ROUTES = ["/", "/user/login", "/user/register", "/data/flood-info"]
 
 @cache.cached(timeout=0, key_prefix="all_stations_data")
 def get_all_stations_data():
-    return st.get_all_stations_data()
+    return st.get_station_predicted_data(1005)
 
 
-all_stations_data = st.get_all_stations_data()
+all_stations_data = get_all_stations_data()
 
 
 def get_ok_response(data=None):
@@ -132,12 +132,13 @@ def get_data():
     date = query["date"]
     if not validate_date(date):
         return BadRequest("Date must be in YYYY-MM-DD format")
-    res = {}
-    for id in station_ids:
-        if not isinstance(id, int):
-            return BadRequest("All station ids must be integers")
-        if id not in WEATHER_STATIONS:
-            return BadRequest(f"{id} is not a station id")
-        station_data = all_stations_data[id]
-        res[id] = station_data[date]
-    return get_ok_response(res)
+    # res = {}
+    # for id in station_ids:
+    #     if not isinstance(id, int):
+    #         return BadRequest("All station ids must be integers")
+    #     if id not in WEATHER_STATIONS:
+    #         return BadRequest(f"{id} is not a station id")
+    #     station_data = all_stations_data[id]
+    #     res[id] = station_data[date]
+    # return get_ok_response(res)
+    return get_ok_response(all_stations_data)

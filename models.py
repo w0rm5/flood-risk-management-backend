@@ -102,7 +102,7 @@ class User(BaseClass):
             raise Unauthorized("User not exist")
         if not check_password(password, found_user["password"]):
             raise Unauthorized("Incorrect password")
-        return jwt_encode({"email": email, "is_admin": found_user["is_admin"]})
+        return jwt_encode({"email": email, "is_admin": found_user["is_admin"], "districts": found_user["districts"]})
     
     @classmethod
     def get_info(cls, token_data):
