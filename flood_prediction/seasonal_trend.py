@@ -7,8 +7,20 @@ import csv
 from flood_prediction.constants import FLOOD_DATA_DIR, WEATHER_STATIONS
 import db
 
+DB_COL_NAME = "forecasted_values"
 
-def get_all_stations_data():
+
+def get_forecasted_data(station_ids: list, date: str):
+    found = db.find(
+        DB_COL_NAME,
+        {"station_id": {"$in": station_ids}},
+        {"_id": 0, "station_id": 1, f"data.{date}": 1},
+    )
+
+    return list(found)
+
+
+def get_all_stations_forcasted_data():
     forecasted_values = []
     for station_id in WEATHER_STATIONS:
         # Store the forecasted values in the dictionary
@@ -127,6 +139,7 @@ def get_station_predicted_data(station_id):
 #     # Store the forecasted values in the dictionary
 #     forecasted_values[station_id] = getData(station_id)
 
-
-def save_to_db(forecasted_values):
-    db.insert_many("forecasted_values", forecasted_values)
+count = db.count_doc(DB_COL_NAME)
+if count == 0:
+    forecasted_values = get_all_stations_forcasted_data()
+    db.insert_many(DB_COL_NAME, forecasted_values)

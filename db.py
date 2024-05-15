@@ -8,6 +8,11 @@ clusters = MongoClient(MONGO_URI)
 db = clusters[DB_NAME]
 
 
+def count_doc(col_name: str):
+    col = db[col_name]
+    return col.count_documents(filter={})
+
+
 def find_one(col_name: str, query: dict = None, projection: dict = None):
     col = db[col_name]
     return col.find_one(filter=query, projection=projection)
