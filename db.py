@@ -37,18 +37,18 @@ def insert_many(col_name: str, docs: list):
     return col.insert_many(docs)
 
 
-def update_one(col_name: str, query: dict, update: dict):
+def update_one(col_name: str, query: dict, update: dict, upsert=False):
     col = db[col_name]
-    return col.update_one(query, update)
+    return col.update_one(query, {"$set": update}, upsert=upsert)
 
 
-def update_by_id(col_name: str, id: str | ObjectId, update: dict):
-    return update_one(col_name, {"_id": ObjectId(id)}, update)
+def update_by_id(col_name: str, id: str | ObjectId, update: dict, upsert=False):
+    return update_one(col_name, {"_id": ObjectId(id)}, {"$set": update}, upsert)
 
 
-def update_many(col_name: str, query: dict, update: dict):
+def update_many(col_name: str, query: dict, update: dict, upsert=False):
     col = db[col_name]
-    return col.update_many(query, update)
+    return col.update_many(query, {"$set": update}, upsert=upsert)
 
 
 def delete_one(col_name: str, query: dict):
@@ -62,4 +62,7 @@ def delete_by_id(col_name: str, id: str | ObjectId):
 
 def delete_many(col_name: str, query: dict):
     col = db[col_name]
+    col.up
     return col.delete_many(query)
+
+

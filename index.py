@@ -62,13 +62,13 @@ def check_token():
     if request.method == "OPTIONS" or request.path in PUBLIC_ROUTES:
         pass
     elif not ACCESS_TOKEN_HEADER in request.headers:
-        raise get_response(None, 403, "Missing token")
+        return get_response(None, 403, "Missing token")
     else:
         try:
             user_data = auth.jwt_decode(request.headers[ACCESS_TOKEN_HEADER])
             g.user_data = user_data
         except:
-            raise get_response(None, 403, "Invalid token")
+            return get_response(None, 403, "Invalid token")
 
 
 @app.get("/")
@@ -121,3 +121,26 @@ def uploadFile():
     file = request.files["file"]
     code, message = validateCSV(file)
     return get_response(None, code, message)
+
+
+@app.get("/data/start_train")
+def start_training():
+    check_if_admin()
+    start_date = request.args.get("start_date")
+    if start_date is None or start_date == "":
+        return get_response(None, 400, "Please specified a start date")
+    if not validate_date(start_date):
+        return get_response(None, 400, "Start date must be in YYYY-MM-DD format")
+    end_date = request.args.get("end_date")
+    if end_date is None or end_date == "":
+        return get_response(None, 400, "Please specified an end date")
+    if not validate_date(end_date):
+        return get_response(None, 400, "End date must be in YYYY-MM-DD format")
+
+    start_date = datetime.strptime(start_date, "%Y-%m-%d")
+    end_date = datetime.strptime(end_date, "%Y-%m-%d")
+    if end_date <= start_date:
+        return get_response(None, 400, "Start date must be before end date")
+
+    st.do_training(start_date.strftime("%Y-%m-%d"), end_date.strftime("%Y-%m-%d"))
+    return get_response()

@@ -8,11 +8,13 @@ DB_COL_NAME = "forecasted_values"
 
 
 def get_forecasted_data(station_ids: list, date: str):
-    found = list(db.find(
-        DB_COL_NAME,
-        {"station_id": {"$in": station_ids}},
-        {"_id": 0, "station_id": 1, f"data.{date}": 1},
-    ))
+    found = list(
+        db.find(
+            DB_COL_NAME,
+            {"station_id": {"$in": station_ids}},
+            {"_id": 0, "station_id": 1, f"data.{date}": 1},
+        )
+    )
     res = []
     for id in station_ids:
         station = next((s for s in found if s["station_id"] == id), None)
@@ -23,15 +25,22 @@ def get_forecasted_data(station_ids: list, date: str):
         res.append(station)
     return res
 
+def do_training(start_date:str, end_date:str):
+    new_forecasted_values = get_all_stations_forcasted_data(start_date, end_date)
+    for new_value in new_forecasted_values:
+        db.update_one(DB_COL_NAME, {"station_id": new_value["station_id"]}, new_value, True)
 
-def get_all_stations_forcasted_data():
+
+def get_all_stations_forcasted_data(start_date="2024-01-01", end_date="2024-12-31"):
     forecasted_values = []
     for station_id in WEATHER_STATIONS:
         try:
             forecasted_values.append(
                 {
                     "station_id": station_id,
-                    "data": get_station_predicted_data(station_id),
+                    "data": get_station_predicted_data(
+                        station_id, start_date, end_date
+                    ),
                 }
             )
         except:
@@ -39,9 +48,10 @@ def get_all_stations_forcasted_data():
     return forecasted_values
 
 
-def get_station_predicted_data(station_id):
+def get_station_predicted_data(station_id:int, start_date:str, end_date:str):
     data_years = []
-    for year in range(2011, 2024):
+    end_year = int(end_date.rsplit("-")[0])
+    for year in range(2011, end_year):
         data = pd.read_csv(f"{FLOOD_DATA_DIR}/60rf_{year}.csv", parse_dates=["obstime"])
         data_years.append(data)
 
@@ -86,7 +96,7 @@ def get_station_predicted_data(station_id):
     forecast = forecast_trend + forecast_seasonal
 
     # Generate forecasts for future dates (2024)
-    future_dates = pd.date_range(start="2024-01-01", end="2024-12-31", freq="d")
+    future_dates = pd.date_range(start=start_date, end=end_date, freq="d")
     future_forecast_trend = pd.Series(result.trend[-1], index=future_dates)
     future_forecast_seasonal = pd.Series(
         result.seasonal[-len(future_dates) :].values, index=future_dates

@@ -1,5 +1,5 @@
 from bson import ObjectId
-from werkzeug.exceptions import Conflict, NotFound, BadRequest, Unauthorized
+from werkzeug.exceptions import Conflict, NotFound, BadRequest, Unauthorized, InternalServerError
 from auth import hashPassword, check_password, jwt_encode
 import db
 import re
@@ -113,3 +113,12 @@ class User(BaseClass):
         del found["_id"]
         del found["password"]
         return obj_id_to_str(found)
+    
+    @classmethod
+    def update_info(cls, email, update):
+        found = db.find_one("users", {"email": email})
+        if found == None:
+            raise NotFound("User not found")
+        res = db.update_by_id("users", found["_id"], update)
+        if res.modified_count == 0:
+            raise InternalServerError("Failed to update user info")
