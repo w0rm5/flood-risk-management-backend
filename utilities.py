@@ -55,6 +55,7 @@ def validateCSV(file):
         saved_file_dir = os.path.join(FLOOD_DATA_DIR, file.filename)
         if os.path.isfile(saved_file_dir):
             return 400, "File already exists"
+        file.stream.seek(0)
         file.save(saved_file_dir)
     except:
         return 400, "Data not in correct format"
