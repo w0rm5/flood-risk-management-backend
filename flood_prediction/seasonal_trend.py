@@ -1,9 +1,6 @@
 import pandas as pd
 from statsmodels.tsa.seasonal import STL
-import matplotlib.pyplot as plt
 import numpy as np
-import os
-import csv
 from flood_prediction.constants import FLOOD_DATA_DIR, WEATHER_STATIONS
 import db
 
@@ -30,11 +27,6 @@ def get_forecasted_data(station_ids: list, date: str):
 def get_all_stations_forcasted_data():
     forecasted_values = []
     for station_id in WEATHER_STATIONS:
-        # Store the forecasted values in the dictionary
-        # try:
-        #     forecasted_values[station_id] = get_station_predicted_data(station_id)
-        # except:
-        #     forecasted_values[station_id] = None
         try:
             forecasted_values.append(
                 {

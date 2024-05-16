@@ -1,4 +1,4 @@
-from flask import Flask, request, g, jsonify
+from flask import Flask, request, g, jsonify, abort
 from flask_cors import CORS
 
 # from flask_caching import Cache
@@ -8,10 +8,12 @@ from werkzeug.exceptions import HTTPException
 from models import Response, User
 import auth
 import flood_prediction.seasonal_trend as st
+
 import datetime
-import math
+
+# import math
 from datetime import datetime
-# from flood_prediction.constants import WEATHER_STATIONS
+from utilities import validateCSV
 
 load_dotenv()
 
@@ -27,23 +29,8 @@ ACCESS_TOKEN_HEADER = "token"
 PUBLIC_ROUTES = ["/", "/user/login", "/user/register", "/data/flood-info"]
 
 
-# @cache.cached(timeout=0, key_prefix="all_stations_data")
-# def get_all_stations_data():
-#     return st.get_all_stations_data()
-
-
-# all_stations_data = get_all_stations_data()
-
-
 def get_response(data=None, code=200, message="Success"):
     return jsonify(Response(message, code, data).__dict__), code
-
-
-# def time_until_end_of_day():
-#     dt = datetime.datetime.now()
-#     tomorrow = dt + datetime.timedelta(days=1)
-#     time_until_end_of_day = datetime.datetime.combine(tomorrow, datetime.time.min) - dt
-#     return math.ceil(time_until_end_of_day.total_seconds())
 
 
 def validate_date(date_text):
@@ -53,6 +40,11 @@ def validate_date(date_text):
         return True
     except ValueError:
         return False
+
+
+def check_if_admin():
+    if g.user_data["is_admin"] == False:
+        abort(401, "Unauthorized")
 
 
 @app.errorhandler(Exception)
@@ -103,21 +95,6 @@ def get_user_info():
     return get_response(res)
 
 
-# @app.get("/data/flood-info")
-# # @cache.cached(timeout=time_until_end_of_day(), query_string=True) # cache for the whole day
-# def get_flood_info():
-#     station_id = request.args.get("station_id")
-#     if station_id is None or station_id == "":
-#         return get_response(None, 400, "Please specified a station")
-#     station_id = int(station_id)
-#     station_data = all_stations_data[station_id]
-#     date = request.args.get("date")
-#     if date is None or date == "" or date not in station_data:
-#         return get_response(station_data)
-#     res = station_data[date]
-#     return get_response(res)
-
-
 @app.post("/data/flood-info")
 def get_data():
     query = request.get_json()
@@ -133,13 +110,14 @@ def get_data():
     date = query["date"]
     if not validate_date(date):
         return get_response(None, 400, "Date must be in YYYY-MM-DD format")
-    # res = {}
-    # for id in station_ids:
-    #     if not isinstance(id, int):
-    #         return get_response(None, 400, "All station ids must be integers")
-    #     if id not in WEATHER_STATIONS:
-    #         return get_response(None, 400, f"{id} is not a station id")
-    #     station_data = all_stations_data[id]
-    #     res[id] = station_data[date]
-    # return get_response(res)
     return get_response(st.get_forecasted_data(station_ids, date))
+
+
+@app.post("/file/upload_csv")
+def uploadFile():
+    check_if_admin()
+    if "file" not in request.files:
+        return get_response(None, 400, "No file uploaded")
+    file = request.files["file"]
+    code, message = validateCSV(file)
+    return get_response(None, code, message)

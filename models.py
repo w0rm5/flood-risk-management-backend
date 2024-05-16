@@ -86,6 +86,7 @@ class User(BaseClass):
         if found is not None:
             raise Conflict("Email is already in use")
         self.password = hashPassword(self.password)
+        self.is_admin = False
         data = self.__dict__
         del data["confirm_password"]
         db.insert_one("users", self.__dict__)
