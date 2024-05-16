@@ -11,13 +11,20 @@ DB_COL_NAME = "forecasted_values"
 
 
 def get_forecasted_data(station_ids: list, date: str):
-    found = db.find(
+    found = list(db.find(
         DB_COL_NAME,
         {"station_id": {"$in": station_ids}},
         {"_id": 0, "station_id": 1, f"data.{date}": 1},
-    )
-
-    return list(found)
+    ))
+    res = []
+    for id in station_ids:
+        station = next((s for s in found if s["station_id"] == id), None)
+        if station == None:
+            station = {"station_id": id, "data": {date: 0}}
+        elif date not in station["data"]:
+            station["data"][date] = 0
+        res.append(station)
+    return res
 
 
 def get_all_stations_forcasted_data():
